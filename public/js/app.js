@@ -26,7 +26,7 @@ form.addEventListener('submit',(event)=>{
     //         console.log('cannot get weather:'+errorcode);
     //     })
     // })
-    const url = 'http://localhost:3000/weather?address='+searchButton.value;
+    const url = '/weather?address='+searchButton.value;
     axios.get(url).then(function (response) {
        console.log(response.data);
         msg1.textContent =response.data.location.name;

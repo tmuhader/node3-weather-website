@@ -7,7 +7,8 @@ const geocode = require('./utils/geocode.js');
 const forecast = require('./utils/forecast.js');
 //call the express function exposed by the express module
 const app = express();
-
+//get the port value environment variable set by Heroku for our app or default 3000 if not exist (work locally)
+const port = process.env.PORT || 3000;
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates/views');
@@ -127,6 +128,6 @@ app.get('*', (req, res) => {
     })
 });
 //listen is an asych method so the arrow function is a callback after the server is up
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.')
+app.listen(port, () => {
+    console.log('Server is up on port .'+port);
 });
