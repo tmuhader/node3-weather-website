@@ -7,7 +7,7 @@ const geocode = require('./utils/geocode.js');
 const forecast = require('./utils/forecast.js');
 //call the express function exposed by the express module
 const app = express();
-//get the port value environment variable set by Heroku for our app or default 3000 if not exist (work locally)
+//get the port value environment variable set by Heroku (this can be set by the Docker container run command) for our app or default 3000 if not exist (work locally)
 const port = process.env.PORT || 3000;
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -131,3 +131,4 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
     console.log('Server is up on port .'+port);
 });
+//added after Git add
