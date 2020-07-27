@@ -6,7 +6,7 @@ environment {
 agent {
   docker {
   //this image is used for the Docker agent for the Build and Test stages
-   image 'yobasystems/alpine-docker'
+   image 'matthewhartstonge/node-docker'
                args '-p 3000:3000'
                args '-w /app'
                args '-v /var/run/docker.sock:/var/run/docker.sock'
