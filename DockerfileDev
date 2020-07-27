@@ -4,10 +4,9 @@ WORKDIR /wheatherApp
 #this following 2 commands are useless from Dev as the package.json and dependencies files already exist in the host volume mounted into the container
 COPY package.json ./
 RUN npm install
-
 #for development no need to copy the application folders into the image because we are mounting this folder as a host mounted volume in the container. but we need to install nodemon
 #but for production we need to still to copy it and not install nodemon to keep the container light.
-#and run npm install from Weather-Api-AsyncAwait folder. we can create 2 Dockerfiles; one for production (Dockerfile calling: npm start) and one for Dev (Dockerfile_dev calling: npm test)
+#and run npm install. we can create 2 Dockerfiles; one for production (Dockerfile calling: npm start) and one for Dev (Dockerfile_dev calling: npm test)
 #[to be tested] or we can create a unique Dockerfile calling a build variable that will be passed at the moment of the image build using: --build-arg MODE=test
 ##ARG MODE="start"
 ##CMD ["${MODE}"]
