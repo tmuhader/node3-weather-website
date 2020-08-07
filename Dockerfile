@@ -1,3 +1,5 @@
+#this file is used to create the image for the api container to run our application (weather API) to receive requests
+#from testing container for Acceptance Testing
 FROM node:14.2.0-alpine
 RUN mkdir -p /wheatherApp
 WORKDIR /wheatherApp
