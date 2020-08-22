@@ -40,7 +40,6 @@ options {
 stages{
     stage("Build"){
         steps{
-            cleanWs()
             sh 'npm install'
         }
     }
@@ -81,5 +80,10 @@ stages{
             echo "script to be added"
         }
     }
+   /* stage("cleaning"){
+        steps{
+            cleanWs()
+        }
+    }*/
 }
 }
