@@ -1,4 +1,5 @@
 pipeline{
+//We will be using those variables in the Build & Push Docker image stage:
 environment {
 //fully qualified name, which looks as follows: <registry URL>/<User or Org>/<image name>:<tag>
         registry = "tmuhader/weather-at"
@@ -39,6 +40,7 @@ options {
 stages{
     stage("Build"){
         steps{
+            cleanWs()
             sh 'npm install'
         }
     }
@@ -47,14 +49,20 @@ stages{
             echo '*****Unit Test to be added****'
         }
     }
+    /*
+    once the application is built, unit-tested on the Jenkins agent, we can create an image (package) and push it to Dockerhub
+    to be used for AT (this is the simple CI pipeline/ Commit phase of the CD flow)
+    */
     stage("Build image & push it to DockerHub"){
         steps{
         /*
         The most generic way to define an image is by its fully qualified name, which looks as follows: <registry URL>/<User or Org>/<name>:<tag>
         see Location 2168
+
         this image is used by the api container to run our application (weather API) to receive requests from testing container
         for Acceptance Testing stage. this image is different than the image used earlier for Jenkins agent "matthewhartstonge/node-docker".
-        we need to create 2 Dockerfiles, one for the agent image and one for the AT container image (or we can use Environment variables at build time)
+        we need to create 2 Dockerfiles, one for the agent image and one for the AT container image (or we can use Environment variables at build time).
+        The AT image is built using the Dockerfile which was copied by the Jenkins agent when it fetched the Jenkinsfile and other code from Github
 
         $BUILD_NUMBER is an Env variable defined by Jenkins (http://localhost:8080/env-vars.html/)
         */
@@ -62,6 +70,15 @@ stages{
             sh 'docker login -u tmuhader -p $DOCKER_PWD'
             sh 'docker image push $registry:$BUILD_NUMBER'
             sh 'docker image rm $registry:$BUILD_NUMBER'
+        }
+    }
+    /*
+    this stage will execute the following:
+    1)
+    */
+    stage("Deploy and integration test"){
+        steps{
+            echo "script to be added"
         }
     }
 }
