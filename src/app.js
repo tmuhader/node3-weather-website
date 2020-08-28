@@ -65,7 +65,7 @@ app.get("/weather", (req, res) => {
   //using Object destructuring syntax, see page 264 in JS book. this is similar to let address = req.query.address (dubai is the default value)
   //use URL: http://localhost:3000/weather?address=dubai
   //provide default value to address (the destructured object property)
-  let { address = "dubai" } = req.query;
+  let { address = "nantes" } = req.query;
   //to debug use command; node inspect src/app.js and then open chrome and type:  chrome://inspect, add the app folder to the Browser working directory.
   // this will allow the Node.js app to run in the Browser as any client side JS script
   debugger;
