@@ -41,6 +41,7 @@ stages{
 //command git url was not invoked here as in the Jenkins book, but the application code is being copied when the Jenkins
 //fetch the Jenkinsfile from Github
     stage("Build"){
+    notify("Build started")
         steps{
             sh 'npm install'
         }
@@ -67,10 +68,11 @@ stages{
 
         $BUILD_NUMBER is an Env variable defined by Jenkins (http://localhost:8080/env-vars.html/)
         */
-            sh 'docker image build -t $registry:$BUILD_NUMBER .'
-            sh 'docker login -u tmuhader -p $DOCKER_PWD'
-            sh 'docker image push $registry:$BUILD_NUMBER'
-            sh 'docker image rm $registry:$BUILD_NUMBER'
+        echo '*****Build image to be added****'
+//             sh 'docker image build -t $registry:$BUILD_NUMBER .'
+//             sh 'docker login -u tmuhader -p $DOCKER_PWD'
+//             sh 'docker image push $registry:$BUILD_NUMBER'
+//             sh 'docker image rm $registry:$BUILD_NUMBER'
         }
     }
     /*
@@ -87,5 +89,14 @@ stages{
             cleanWs()
         }
     }*/
+}
+
+def notify(status){
+    emailext (
+      to: "tmuhader@gmail.com",
+      subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+    )
 }
 }
