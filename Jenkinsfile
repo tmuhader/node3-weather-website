@@ -93,7 +93,7 @@ stages{
 
 
 }
-def notify(status){
+void notify(status){
     emailext (
       to: "tmuhader@gmail.com",
       subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
