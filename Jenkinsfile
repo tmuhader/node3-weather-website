@@ -90,8 +90,11 @@ stages{
         }
     }*/
 }
-
-
+post {
+  always {
+    notify("Build finished")
+  }
+}
 }
 void notify(status){
     emailext (
