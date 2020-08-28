@@ -41,8 +41,8 @@ stages{
 //command git url was not invoked here as in the Jenkins book, but the application code is being copied when the Jenkins
 //fetch the Jenkinsfile from Github
     stage("Build"){
-    notify("Build started")
         steps{
+            notify("Build started")
             sh 'npm install'
         }
     }
